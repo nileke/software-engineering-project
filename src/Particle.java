@@ -6,8 +6,9 @@ public class Particle{
     private static int numOfParticles;
     private Color color; //color of particle
     private boolean moving;
-    private final double L; //unknown constant
+    private double L; //unknown constant
     private int diameter;
+    private int dimx,dimy;
 
 
     /**
@@ -18,11 +19,11 @@ public class Particle{
     public Particle() {
         this.moving = true;
         this.numOfParticles++;
-        //this.xpos = this.getRandomPos();
-        //this.ypos = this.getRandomPos();
-        this.xpos = 0;
-        this.ypos = 0;
+        this.xpos = this.getRandomPos(800);
+        this.ypos = this.getRandomPos(400);
         this.diameter = 2;
+        this.color = Color.BLACK;
+        this.L = 1;
     }
 
     /**
@@ -35,28 +36,41 @@ public class Particle{
         this.xpos = xpos;
         this.ypos = ypos;
         this.moving=true;
-        this.L = 1;
+        this.L = 1000;
     }
 
-    private double getRandomPos(){
+    private double getRandomPos(int s){
         Random seed = new Random();
         // random index
+        return seed.nextDouble()*s+40;
     }
 
     public void move(){
-        Random rand = new Random();
-        double maxAngle = 2 * Math.PI;
-        double  n = rand.nextDouble() * (maxAngle);
-        this.xpos = xpos + this.L * Math.cos(n);
+        if(this.moving) {
+            Random rand = new Random();
+            double maxAngle = 2 * Math.PI;
+            double n = rand.nextDouble() * (maxAngle);
+            this.xpos = xpos + this.L * Math.cos(n);
+            this.ypos = ypos + this.L * Math.sin(n);
+        }
+
+    }
+
+
+    public void setMoving(boolean moving) {
+        this.moving = moving;
     }
 
     //http://pages.cs.wisc.edu/~bahls/cs302/miniC/Particle.java
     public void draw(Graphics g){
         g.setColor(this.color);
-        int radius = this.diameter/2;
-        g.fillOval((int) this.xpos - radius, (int) this.ypos - radius, this.diameter, this.diameter);
+        double radius = this.diameter/2;
+        int xPos = (int) (this.xpos - radius);
+        int yPos = (int) (this.ypos-radius);
+        g.fillOval(xPos, yPos, this.diameter, this.diameter);
 
     }
+
 
     public void setColor(Color color) {
         this.color = color;
@@ -70,6 +84,10 @@ public class Particle{
         return ypos;
     }
 
+    public void setDiameter(int diameter) {
+        this.diameter = diameter;
+    }
+
     public boolean isMoving() {
         return moving;
     }
@@ -79,4 +97,11 @@ public class Particle{
     }
 
 
+    public void setDimx(int dimx) {
+        this.dimx = dimx;
+    }
+
+    public void setDimy(int dimy) {
+        this.dimy = dimy;
+    }
 }

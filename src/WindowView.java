@@ -11,7 +11,7 @@ public class WindowView extends JFrame{
     private SimulationModel simModel;
 
     public WindowView(SimulationModel simModel){
-        simModel = new SimulationModel()
+        this.simModel = simModel;
         model =  new ControlPanelModel();
         input =  new ControlPanelInput(model);
         frame = new JFrame();
@@ -22,12 +22,12 @@ public class WindowView extends JFrame{
 
     void guiSetup(){
         frame.setVisible(true);
-        mainPanel.add(new TextField("Simulation"));
+        mainPanel.add(simModel);
         controlPanel.add(input);
         frame.add(mainPanel, BorderLayout.CENTER);
         frame.add(controlPanel, BorderLayout.WEST);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500,500);
-
+        frame.setSize(1000,500);
+        frame.setResizable(false);
     }
 }
