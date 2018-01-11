@@ -24,6 +24,9 @@ public class WindowView extends JFrame{
         frame.setVisible(true);
         mainPanel.add(simModel);
         controlPanel.add(input);
+
+        model.addObserver(simModel);
+
         frame.add(mainPanel, BorderLayout.CENTER);
         frame.add(controlPanel, BorderLayout.WEST);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

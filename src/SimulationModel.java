@@ -24,7 +24,7 @@ public class  SimulationModel extends JPanel implements Observer {
 
 
     SimulationModel()  {
-        this.numberOfParticles = 10000;
+        this.numberOfParticles = 1000;
         particles = new Particle[this.numberOfParticles];
         this.createParticles();
         timer = new Timer();
@@ -34,6 +34,7 @@ public class  SimulationModel extends JPanel implements Observer {
     private void createParticles(){
         for (int i=0; i<this.numberOfParticles; i++) {
             Particle p = new Particle();
+            p.setDiameter(5);
             particles[i] = p;
         }
     }
@@ -92,8 +93,19 @@ public class  SimulationModel extends JPanel implements Observer {
         this.numberOfParticles = numberOfParticles;
     }
 
+    void updateL(ControlPanelModel l){
+        for(Particle p:particles){
+            p.setL(l.getL());
+            p.setColor(l.getColor());
+
+        }
+    }
+
     @Override
     public void update(Observable o, Object arg) {
+        ControlPanelModel l = (ControlPanelModel) o;
+        this.updateL(l);
+        repaint();
 
     }
 }

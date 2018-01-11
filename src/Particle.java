@@ -23,7 +23,11 @@ public class Particle{
         this.ypos = this.getRandomPos(400);
         this.diameter = 2;
         this.color = Color.BLACK;
-        this.L = 1;
+        this.L = 0.5;
+    }
+
+    public void setL(double l) {
+        L = l;
     }
 
     /**
@@ -46,12 +50,12 @@ public class Particle{
     }
 
     public void move(){
-        if(this.moving) {
+        if(moving) {
             Random rand = new Random();
             double maxAngle = 2 * Math.PI;
             double n = rand.nextDouble() * (maxAngle);
-            this.xpos = xpos + this.L * Math.cos(n);
-            this.ypos = ypos + this.L * Math.sin(n);
+            xpos = xpos + L * Math.cos(n);
+            ypos = ypos + L * Math.sin(n);
         }
 
     }
