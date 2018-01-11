@@ -6,7 +6,7 @@ public class Particle{
     private static int numOfParticles;
     private Color color; //color of particle
     private boolean moving;
-    private final double L = 1; //unknown constant
+    private double L = 1; //unknown constant
     private int diameter;
 
 
@@ -36,6 +36,7 @@ public class Particle{
         this.ypos = ypos;
         this.moving=true;
         // this.L = 1;
+
     }
 
     private double getRandomPos(){
