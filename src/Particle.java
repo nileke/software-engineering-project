@@ -6,7 +6,7 @@ public class Particle{
     private static int numOfParticles;
     private Color color; //color of particle
     private boolean moving;
-    private final double L; //unknown constant
+    private final double L = 1; //unknown constant
     private int diameter;
 
 
@@ -35,12 +35,13 @@ public class Particle{
         this.xpos = xpos;
         this.ypos = ypos;
         this.moving=true;
-        this.L = 1;
+        // this.L = 1;
     }
 
     private double getRandomPos(){
         Random seed = new Random();
         // random index
+        return 0;
     }
 
     public void move(){

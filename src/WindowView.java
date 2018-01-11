@@ -11,7 +11,7 @@ public class WindowView extends JFrame{
     private SimulationModel simModel;
 
     public WindowView(SimulationModel simModel){
-        simModel = new SimulationModel()
+        simModel = new SimulationModel();
         model =  new ControlPanelModel();
         input =  new ControlPanelInput(model);
         frame = new JFrame();
