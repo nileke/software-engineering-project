@@ -33,24 +33,24 @@ public class Particle {
         this.xpos = xpos;
         this.ypos = ypos;
         this.moving=true;
-<<<<<<< HEAD
-=======
-        // this.L = 1;
-
->>>>>>> 9dc9cb15fca02aae6e2feeb379eca36c7b42e0d3
     }
 
     private double getRandomPos(){
         Random seed = new Random();
         // random index
-        return seed.nextDouble() * 1500;
+        return seed.nextDouble() * 1000;
     }
 
     public void move(){
-        Random rand = new Random();
-        double maxAngle = 2 * Math.PI;
-        double  n = rand.nextDouble() * (maxAngle);
-        this.xpos = xpos + this.L * Math.cos(n);
+        if (moving) {
+            Random rand = new Random();
+            double maxAngle = 2 * Math.PI;
+            double n = rand.nextDouble() * (maxAngle);
+            this.xpos = xpos + this.L * Math.cos(n);
+            this.ypos = ypos + this.L * Math.sin(n);
+            this.setColor(Color.BLACK);
+
+        }
     }
 
     //http://pages.cs.wisc.edu/~bahls/cs302/miniC/Particle.java
@@ -77,6 +77,14 @@ public class Particle {
 
     public boolean isMoving() {
         return moving;
+    }
+
+    public void setMoving(boolean m) {
+        moving = m;
+    }
+
+    public void setDiameter(int n) {
+        this.diameter = n;
     }
 
     public static int getNumOfParticles() {
