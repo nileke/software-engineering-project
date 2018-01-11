@@ -10,17 +10,25 @@ public class  SimulationModel extends JPanel implements Observer {
     Particle[] particles;
 
     private int numberOfParticles;
-    int seconds = 0;
-    TimerTask task;
-    Timer timer;
+    private Timer timer;
 
-    SimulationModel()  {
+    SimulationModel() {
         this.numberOfParticles = 100;
         particles = new Particle[100];
         timer = new Timer();
-        for (int i=0; i<100; i++) {
+    }
+
+    SimulationModel(int numberOfParticles) {
+        this.numberOfParticles = numberOfParticles;
+        particles = new Particle[this.numberOfParticles];
+        timer = new Timer();
+    }
+
+    @Override
+    protected void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        for (int i = 0; i < particles.length; i++) {
             Particle p = new Particle();
-            Graphics g = getGraphics();
             p.draw(g);
             particles[i] = p;
         }
@@ -31,21 +39,24 @@ public class  SimulationModel extends JPanel implements Observer {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                // Your database code here
                 for (Particle p : particles) {
                     p.move();
                 }
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 repaint();
             }
-        }, 0, 33);
-    }
-
-    SimulationModel(int numberOfParticles) {
-        this.numberOfParticles = numberOfParticles;
+        }, 0, 1000);
     }
 
     @Override
     public void update(Observable o, Object arg) {
 
     }
+
+
+
 }

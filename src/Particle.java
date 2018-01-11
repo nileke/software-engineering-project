@@ -1,7 +1,7 @@
 import java.awt.*;
 import java.util.Random;
 
-public class Particle{
+public class Particle {
     private double xpos, ypos; //position
     private static int numOfParticles;
     private Color color; //color of particle
@@ -17,12 +17,10 @@ public class Particle{
      */
     public Particle() {
         this.moving = true;
-        this.numOfParticles++;
-        //this.xpos = this.getRandomPos();
-        //this.ypos = this.getRandomPos();
-        this.xpos = 0;
-        this.ypos = 0;
-        this.diameter = 2;
+        numOfParticles++;
+        this.xpos = this.getRandomPos();
+        this.ypos = this.getRandomPos();
+        this.diameter = 4;
     }
 
     /**
@@ -31,17 +29,16 @@ public class Particle{
      *
      */
     public Particle(double xpos, double ypos, boolean moving, Color color){
-        this.numOfParticles++;
+        numOfParticles++;
         this.xpos = xpos;
         this.ypos = ypos;
         this.moving=true;
-        // this.L = 1;
     }
 
     private double getRandomPos(){
         Random seed = new Random();
         // random index
-        return 0;
+        return seed.nextDouble() * 1500;
     }
 
     public void move(){
@@ -55,7 +52,9 @@ public class Particle{
     public void draw(Graphics g){
         g.setColor(this.color);
         int radius = this.diameter/2;
-        g.fillOval((int) this.xpos - radius, (int) this.ypos - radius, this.diameter, this.diameter);
+        int xPos = (int) (this.xpos - radius);
+        int yPos = (int) (this.ypos - radius);
+        g.fillOval(xPos, yPos, this.diameter, this.diameter);
 
     }
 
