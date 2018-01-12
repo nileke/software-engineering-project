@@ -30,7 +30,7 @@ public class WindowView extends JFrame{
         frame.add(mainPanel, BorderLayout.CENTER);
         frame.add(controlPanel, BorderLayout.WEST);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(1000,500);
-        frame.setResizable(false);
+        frame.setSize(1200,500);
+        //frame.setResizable(false);
     }
 }

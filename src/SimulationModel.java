@@ -1,12 +1,15 @@
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
 import java.util.Timer;
 
+import static java.lang.Math.abs;
+
 public class  SimulationModel extends JPanel implements Observer {
     Particle[] particles;
+   ArrayList<Particle> particleMap;
     private int numberOfParticles;
-    int seconds = 0;
     TimerTask task;
     Timer timer;
     int xdim;
@@ -24,9 +27,11 @@ public class  SimulationModel extends JPanel implements Observer {
 
 
     SimulationModel()  {
-        this.numberOfParticles = 1000;
+        this.numberOfParticles = 10000;
         particles = new Particle[this.numberOfParticles];
+        particleMap = new ArrayList<Particle>();
         this.createParticles();
+        this.setSize(850, 450);
         timer = new Timer();
 
     }
@@ -34,7 +39,7 @@ public class  SimulationModel extends JPanel implements Observer {
     private void createParticles(){
         for (int i=0; i<this.numberOfParticles; i++) {
             Particle p = new Particle();
-            p.setDiameter(5);
+            p.setDiameter(3);
             particles[i] = p;
         }
     }
@@ -52,9 +57,33 @@ public class  SimulationModel extends JPanel implements Observer {
                         p.setColor(Color.red);
                         p.setMoving(false);
                         p.setDiameter(4);
+                        if(!particleMap.contains(p)){
+                            particleMap.add(p);
+                        }
+
                     }
 
-                    p.move();
+                    else if(inCircularRadius(p)){
+                        if(!particleMap.contains(p)){
+                            particleMap.add(p);
+                        }
+                        p.setColor(Color.red);
+                        p.setMoving(false);
+                        p.setDiameter(4);
+                    }
+
+                    else if(inParticleRadius(p)){
+                        if(!particleMap.contains(p)){
+                            particleMap.add(p);
+                        }
+                        p.setColor(Color.red);
+                        p.setMoving(false);
+                        p.setDiameter(4);
+                    }
+
+                    else{
+                        p.move();
+                    }
 
 
                 }
@@ -72,14 +101,43 @@ public class  SimulationModel extends JPanel implements Observer {
         }, 0, 1000);
     }
 
+    private boolean inCircularRadius(Particle p){
+        //circle equation (x - center_x)^2 + (y - center_y)^2 < radius^2
+        //we want a circle in the middle, so
+        int center_x = 850/2;
+        int center_y=450/2;
+        int x= (int) p.getXpos();
+        int y=(int) p.getYpos();
+        int radius = 50;
+        double circle = (Math.pow(x-center_x, 2))+(Math.pow(y-center_y,2));
+        boolean condition = circle < Math.pow(2*radius, 2) && circle > Math.pow(radius,2);
+        return condition;
+
+
+    }
+
+    private boolean inParticleRadius(Particle p){
+
+        for(Particle c:particleMap){
+            double diffx = c.getXpos()-p.getXpos();
+            double diffy = c.getYpos()-p.getYpos();
+
+            if(abs(diffx)<2 && abs(diffy)<2){
+                return true;
+            }
+        }
+        return false;
+
+    }
+
     private boolean inBounds(double pos, String type){
         boolean condition;
         int offset = 10;
         if(type=="X"){
-             condition = (pos>=offset) && (pos < (xdim-offset));
+             condition = (pos>=offset) && (pos < (850-offset));
         }
         else if(type=="Y"){
-             condition = (pos>=offset) && (pos < (ydim-offset));
+             condition = (pos>=offset) && (pos < (450-offset));
         }
         else{
             condition = false;
@@ -97,6 +155,7 @@ public class  SimulationModel extends JPanel implements Observer {
         for(Particle p:particles){
             p.setL(l.getL());
             p.setColor(l.getColor());
+            p.setDiameter(l.getDiameter());
 
         }
     }
@@ -106,6 +165,7 @@ public class  SimulationModel extends JPanel implements Observer {
         ControlPanelModel l = (ControlPanelModel) o;
         this.updateL(l);
         repaint();
+
 
     }
 }

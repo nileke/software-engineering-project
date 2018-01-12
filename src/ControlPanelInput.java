@@ -14,8 +14,9 @@ public class ControlPanelInput extends JPanel implements ActionListener {
         b.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                m.setL(10);
+                m.setL(5);
                 m.setColor(Color.magenta);
+                m.setDiameter(5);
             }
         });
     }
