@@ -12,10 +12,12 @@ public class  SimulationModel extends JPanel implements Observer {
     private int xdim;
     private int ydim;
     private Timer timer;
+    private int updateFreq;
 
     SimulationModel(int numberOfParticles) {
         this.numberOfParticles = numberOfParticles;
         particles = new Particle[this.numberOfParticles];
+        updateFreq = 40;
         createParticles();
         timer = new Timer();
     }
@@ -44,13 +46,15 @@ public class  SimulationModel extends JPanel implements Observer {
             public void run() {
                 for (Particle p : particles) {
                    if (!inBounds(p.getXpos(), p.getYpos())) {
-                        p.setMoving(false);
                         p.setColor(Color.red);
-                    }
-                    p.move();
+                        continue;
+                   }
+                   p.move();
+
                 }
+
                 try {
-                    Thread.sleep(10);
+                   Thread.sleep(updateFreq);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -72,9 +76,19 @@ public class  SimulationModel extends JPanel implements Observer {
         return condition;
     }
 
+    void implemenetUpdate(ControlPanelModel cpm) {
+        updateFreq = cpm.getUpdateFreq();
+        for (Particle p : particles) {
+            p.setColor(cpm.getColor());
+        }
+    }
+
     @Override
     public void update(Observable o, Object arg) {
-
+        System.out.println("asdasd");
+        ControlPanelModel cpm = (ControlPanelModel) o;
+        this.implemenetUpdate(cpm);
+        repaint();
     }
 
 
