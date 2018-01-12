@@ -2,7 +2,9 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 import java.util.Timer;
+import java.util.stream.Collectors;
 
 import static java.lang.Math.abs;
 
@@ -41,6 +43,7 @@ public class  SimulationModel extends JPanel implements Observer {
             Particle p = new Particle();
             p.setDiameter(3);
             particles[i] = p;
+
         }
     }
 
@@ -52,7 +55,10 @@ public class  SimulationModel extends JPanel implements Observer {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                for (Particle p : particles) {
+                List<Particle> filteredList = Arrays
+                        .stream(particles)
+                        .filter(particle -> particle.isMoving()).collect(Collectors.toList());
+                for (Particle p : filteredList) {
                     if(!inBounds(p.getXpos(), "X") || !inBounds(p.getYpos(), "Y")){
                         p.setColor(Color.red);
                         p.setMoving(false);
