@@ -8,7 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class  SimulationModel2 extends JPanel implements Observer, ComponentListener {
+public class  SimulationModel extends JPanel implements Observer, ComponentListener {
 
     private Particle[] particles;
     private int numberOfParticles;
@@ -18,7 +18,7 @@ public class  SimulationModel2 extends JPanel implements Observer, ComponentList
     private int updateFreq;
     private Color movingColor;
 
-    SimulationModel2(int numberOfParticles) {
+    SimulationModel(int numberOfParticles) {
         xdim = this.getSize().width;
         ydim = this.getSize().height;
         movingColor = Color.BLACK;
