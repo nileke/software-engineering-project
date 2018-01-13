@@ -28,6 +28,7 @@ public class WindowView extends JFrame{
 
     private void guiSetup(){
         frame.setVisible(true);
+
         mainPanel.add(this.simModel);
         controlPanel.add(input);
 

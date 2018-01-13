@@ -7,7 +7,8 @@ import java.util.Observer;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class  SimulationModel extends JPanel implements Observer, ComponentListener {
+
+public class  SimulationModel2 extends JPanel implements Observer, ComponentListener {
 
     private Particle[] particles;
     private int numberOfParticles;
@@ -17,7 +18,7 @@ public class  SimulationModel extends JPanel implements Observer, ComponentListe
     private int updateFreq;
     private Color movingColor;
 
-    SimulationModel(int numberOfParticles) {
+    SimulationModel2(int numberOfParticles) {
         xdim = this.getSize().width;
         ydim = this.getSize().height;
         movingColor = Color.BLACK;
@@ -51,17 +52,17 @@ public class  SimulationModel extends JPanel implements Observer, ComponentListe
             @Override
             public void run() {
                 for (Particle p : particles) {
-                   if (!inBounds(p.getXpos(), p.getYpos())) {
+                    if (!inBounds(p.getXpos(), p.getYpos())) {
                         p.setColor(Color.red);
                         continue;
-                   } else {
-                       p.setColor(movingColor);
-                   }
-                   p.move();
+                    } else {
+                        p.setColor(movingColor);
+                    }
+                    p.move();
                 }
 
                 try {
-                   Thread.sleep(updateFreq);
+                    Thread.sleep(updateFreq);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -89,11 +90,12 @@ public class  SimulationModel extends JPanel implements Observer, ComponentListe
         updateFreq = cpm.getUpdateFreq();
     }
 
+
     @Override
     public void update(Observable o, Object arg) {
         ControlPanelModel cpm = (ControlPanelModel) o;
         this.implementUpdate(cpm);
-        repaint();
+        //repaint();
     }
 
 

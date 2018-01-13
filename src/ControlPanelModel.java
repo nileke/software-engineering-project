@@ -42,7 +42,5 @@ public class ControlPanelModel extends Observable {
     void change(){
         setChanged();
         notifyObservers();
-
     }
-
 }
