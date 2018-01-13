@@ -21,6 +21,7 @@ public class Particle {
         this.xpos = this.getRandomPos();
         this.ypos = this.getRandomPos();
         this.diameter = 4;
+        this.color = Color.BLACK;
     }
 
     /**
@@ -42,15 +43,11 @@ public class Particle {
     }
 
     public void move(){
-        if (moving) {
-            Random rand = new Random();
-            double maxAngle = 2 * Math.PI;
-            double n = rand.nextDouble() * (maxAngle);
-            this.xpos = xpos + this.L * Math.cos(n);
-            this.ypos = ypos + this.L * Math.sin(n);
-            this.setColor(Color.BLACK);
-
-        }
+        Random rand = new Random();
+        double maxAngle = 2 * Math.PI;
+        double n = rand.nextDouble() * (maxAngle);
+        this.xpos = xpos + this.L * Math.cos(n);
+        this.ypos = ypos + this.L * Math.sin(n);
     }
 
     //http://pages.cs.wisc.edu/~bahls/cs302/miniC/Particle.java
