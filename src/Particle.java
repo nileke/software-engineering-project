@@ -6,10 +6,8 @@ public class Particle {
     private static int numOfParticles;
     private Color color; //color of particle
     private boolean moving;
-
     private double L = 1; //unknown constant
     private int diameter;
-    private int dimx,dimy;
 
 
     /**
@@ -20,8 +18,8 @@ public class Particle {
     public Particle() {
         this.moving = true;
         numOfParticles++;
-        this.xpos = this.getRandomPos();
-        this.ypos = this.getRandomPos();
+        this.xpos = this.getRandomPos(750); // based on start width
+        this.ypos = this.getRandomPos(500); // based on start height
         this.diameter = 4;
         this.color = Color.BLACK;
     }
@@ -41,22 +39,13 @@ public class Particle {
     private double getRandomPos(int s){
         Random seed = new Random();
         // random index
-        return (seed.nextDouble()*s)+25;
+        return seed.nextDouble() * s;
     }
 
     public void move(){
         Random rand = new Random();
         double maxAngle = 2 * Math.PI;
         double n = rand.nextDouble() * (maxAngle);
-        xpos = xpos + L * Math.cos(n);
-        ypos = ypos + L * Math.sin(n);
-
-
-    }
-
-
-    public void setMoving(boolean moving) {
-        this.moving = moving;
         this.xpos = xpos + this.L * Math.cos(n);
         this.ypos = ypos + this.L * Math.sin(n);
     }
@@ -71,7 +60,6 @@ public class Particle {
 
     }
 
-
     public void setColor(Color color) {
         this.color = color;
     }
@@ -82,10 +70,6 @@ public class Particle {
 
     public double getYpos() {
         return ypos;
-    }
-
-    public void setDiameter(int diameter) {
-        this.diameter = diameter;
     }
 
     public boolean isMoving() {
@@ -104,12 +88,4 @@ public class Particle {
         return numOfParticles;
     }
 
-
-    public void setDimx(int dimx) {
-        this.dimx = dimx;
-    }
-
-    public void setDimy(int dimy) {
-        this.dimy = dimy;
-    }
 }
