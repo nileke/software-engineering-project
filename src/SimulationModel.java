@@ -1,5 +1,3 @@
-import com.sun.xml.internal.ws.api.Component;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentEvent;
@@ -17,7 +15,7 @@ public class  SimulationModel extends JPanel implements Observer, ComponentListe
     private int ydim;
     private Timer timer;
     private int updateFreq;
-    Color movingColor;
+    private Color movingColor;
 
     SimulationModel(int numberOfParticles) {
         xdim = this.getSize().width;
@@ -86,11 +84,7 @@ public class  SimulationModel extends JPanel implements Observer, ComponentListe
         return condition;
     }
 
-    void implemenetUpdate(ControlPanelModel cpm) {
-        //for (Particle p : particles) {
-        //    p.setColor(cpm.getColor());
-
-        //}
+    void implementUpdate(ControlPanelModel cpm) {
         movingColor = cpm.getColor();
         updateFreq = cpm.getUpdateFreq();
     }
@@ -98,7 +92,7 @@ public class  SimulationModel extends JPanel implements Observer, ComponentListe
     @Override
     public void update(Observable o, Object arg) {
         ControlPanelModel cpm = (ControlPanelModel) o;
-        this.implemenetUpdate(cpm);
+        this.implementUpdate(cpm);
         repaint();
     }
 
@@ -107,7 +101,6 @@ public class  SimulationModel extends JPanel implements Observer, ComponentListe
     public void componentResized(ComponentEvent e) {
         xdim = this.getSize().width;
         ydim = this.getSize().height;
-        // repaint();
     }
 
     @Override
