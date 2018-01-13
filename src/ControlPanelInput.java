@@ -1,24 +1,62 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 
 public class ControlPanelInput extends JPanel implements ActionListener {
     ControlPanelModel mod;
     GroupLayout layout;
+    JButton colorBlackBtn;
+    JButton colorBlueBtn;
+    JButton colorGreenBtn;
+    JButton speed1;
+    JButton speed2;
+    JButton speed3;
 
     public ControlPanelInput(ControlPanelModel m){
         mod = m;
-        //layout = new GroupLayout(this);
-        //this.setLayout(layout);
-        //layout.setAutoCreateGaps(true);
-        //layout.setAutoCreateContainerGaps(true);
+
+        layout = new GroupLayout(this);
+        this.setLayout(layout);
         setupColorControls();
         setupSpeedControls();
+        setupGui();
+
+    }
+
+    private void setupGui() {
+        // Set auto gaps
+        layout.setAutoCreateGaps(true);
+        layout.setAutoCreateContainerGaps(true);
+
+        // Set the button groups and alignment horizontally and vertically
+        layout.setHorizontalGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(colorBlackBtn)
+                        .addComponent(speed1))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(colorBlueBtn)
+                        .addComponent(speed2))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(colorGreenBtn)
+                        .addComponent(speed3))
+        );
+
+        layout.setVerticalGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(colorBlackBtn)
+                        .addComponent(colorBlueBtn)
+                        .addComponent(colorGreenBtn))
+                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(speed1)
+                        .addComponent(speed2)
+                        .addComponent(speed3))
+        );
+
+        layout.linkSize(SwingConstants.HORIZONTAL, colorBlueBtn, colorBlueBtn, colorGreenBtn, speed1, speed2, speed3);
     }
 
     private void setupColorControls() {
-        JButton colorBlackBtn = new JButton("Black");
+        colorBlackBtn = new JButton("Black");
         colorBlackBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -27,7 +65,7 @@ public class ControlPanelInput extends JPanel implements ActionListener {
         });
 
 
-        JButton colorBlueBtn = new JButton("Blue");
+        colorBlueBtn = new JButton("Blue");
         colorBlueBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -35,7 +73,7 @@ public class ControlPanelInput extends JPanel implements ActionListener {
             }
         });
 
-        JButton colorGreenBtn = new JButton("Green");
+        colorGreenBtn = new JButton("Green");
         colorGreenBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -43,13 +81,10 @@ public class ControlPanelInput extends JPanel implements ActionListener {
             }
         });
 
-        this.add(colorBlackBtn);
-        this.add(colorBlueBtn);
-        this.add(colorGreenBtn);
     }
 
     void setupSpeedControls() {
-        JButton speed1 = new JButton("1x");
+        speed1 = new JButton("1x");
         speed1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -57,7 +92,7 @@ public class ControlPanelInput extends JPanel implements ActionListener {
             }
         });
 
-        JButton speed2 = new JButton("0.5x");
+        speed2 = new JButton("0.5x");
         speed2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -65,22 +100,17 @@ public class ControlPanelInput extends JPanel implements ActionListener {
             }
         });
 
-        JButton speed3 = new JButton("0.1x");
+        speed3 = new JButton("0.1x");
         speed3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 mod.setUpdateFreq(400);
             }
         });
-
-        this.add(speed1);
-        this.add(speed2);
-        this.add(speed3);
-
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        // notify();
     }
 }

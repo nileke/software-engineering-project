@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.awt.event.ComponentListener;
 import java.util.Observable;
 
 public class ControlPanelModel extends Observable {
@@ -22,6 +23,7 @@ public class ControlPanelModel extends Observable {
 
     public void setUpdateFreq(int updateFreq) {
         this.updateFreq = updateFreq;
+        change();
     }
 
     public Color getColor() {

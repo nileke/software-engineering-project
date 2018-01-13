@@ -1,11 +1,15 @@
+import com.sun.xml.internal.ws.api.Component;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class  SimulationModel extends JPanel implements Observer {
+public class  SimulationModel extends JPanel implements Observer, ComponentListener {
 
     private Particle[] particles;
     private int numberOfParticles;
@@ -14,7 +18,10 @@ public class  SimulationModel extends JPanel implements Observer {
     private Timer timer;
     private int updateFreq;
 
+
     SimulationModel(int numberOfParticles) {
+        xdim = this.getSize().width;
+        ydim = this.getSize().height;
         this.numberOfParticles = numberOfParticles;
         particles = new Particle[this.numberOfParticles];
         updateFreq = 40;
@@ -50,7 +57,6 @@ public class  SimulationModel extends JPanel implements Observer {
                         continue;
                    }
                    p.move();
-
                 }
 
                 try {
@@ -60,6 +66,7 @@ public class  SimulationModel extends JPanel implements Observer {
                 }
                 repaint();
             }
+
         }, 0, 1000);
     }
 
@@ -77,20 +84,40 @@ public class  SimulationModel extends JPanel implements Observer {
     }
 
     void implemenetUpdate(ControlPanelModel cpm) {
-        updateFreq = cpm.getUpdateFreq();
         for (Particle p : particles) {
             p.setColor(cpm.getColor());
+
         }
+        updateFreq = cpm.getUpdateFreq();
     }
 
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("asdasd");
         ControlPanelModel cpm = (ControlPanelModel) o;
         this.implemenetUpdate(cpm);
         repaint();
     }
 
 
+    @Override
+    public void componentResized(ComponentEvent e) {
+        xdim = this.getSize().width;
+        ydim = this.getSize().height;
+        repaint();
+    }
 
+    @Override
+    public void componentMoved(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentShown(ComponentEvent e) {
+
+    }
+
+    @Override
+    public void componentHidden(ComponentEvent e) {
+
+    }
 }
