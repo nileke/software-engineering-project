@@ -17,11 +17,12 @@ public class  SimulationModel extends JPanel implements Observer, ComponentListe
     private int ydim;
     private Timer timer;
     private int updateFreq;
-
+    Color movingColor;
 
     SimulationModel(int numberOfParticles) {
         xdim = this.getSize().width;
         ydim = this.getSize().height;
+        movingColor = Color.BLACK;
         this.numberOfParticles = numberOfParticles;
         particles = new Particle[this.numberOfParticles];
         updateFreq = 40;
@@ -55,6 +56,8 @@ public class  SimulationModel extends JPanel implements Observer, ComponentListe
                    if (!inBounds(p.getXpos(), p.getYpos())) {
                         p.setColor(Color.red);
                         continue;
+                   } else {
+                       p.setColor(movingColor);
                    }
                    p.move();
                 }
@@ -84,10 +87,11 @@ public class  SimulationModel extends JPanel implements Observer, ComponentListe
     }
 
     void implemenetUpdate(ControlPanelModel cpm) {
-        for (Particle p : particles) {
-            p.setColor(cpm.getColor());
+        //for (Particle p : particles) {
+        //    p.setColor(cpm.getColor());
 
-        }
+        //}
+        movingColor = cpm.getColor();
         updateFreq = cpm.getUpdateFreq();
     }
 
@@ -103,7 +107,7 @@ public class  SimulationModel extends JPanel implements Observer, ComponentListe
     public void componentResized(ComponentEvent e) {
         xdim = this.getSize().width;
         ydim = this.getSize().height;
-        repaint();
+        // repaint();
     }
 
     @Override
