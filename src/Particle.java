@@ -1,12 +1,13 @@
 import java.awt.*;
 import java.util.Random;
 
-public class Particle{
+public class Particle {
     private double xpos, ypos; //position
     private static int numOfParticles;
     private Color color; //color of particle
     private boolean moving;
-    private double L; //unknown constant
+
+    private double L = 1; //unknown constant
     private int diameter;
     private int dimx,dimy;
 
@@ -18,16 +19,11 @@ public class Particle{
      */
     public Particle() {
         this.moving = true;
-        this.numOfParticles++;
-        this.xpos = this.getRandomPos(800);
-        this.ypos = this.getRandomPos(400);
-        this.diameter = 1;
+        numOfParticles++;
+        this.xpos = this.getRandomPos();
+        this.ypos = this.getRandomPos();
+        this.diameter = 4;
         this.color = Color.BLACK;
-        this.L = 2;
-    }
-
-    public void setL(double l) {
-        L = l;
     }
 
     /**
@@ -36,11 +32,10 @@ public class Particle{
      *
      */
     public Particle(double xpos, double ypos, boolean moving, Color color){
-        this.numOfParticles++;
+        numOfParticles++;
         this.xpos = xpos;
         this.ypos = ypos;
         this.moving=true;
-        this.L = 1000;
     }
 
     private double getRandomPos(int s){
@@ -62,14 +57,16 @@ public class Particle{
 
     public void setMoving(boolean moving) {
         this.moving = moving;
+        this.xpos = xpos + this.L * Math.cos(n);
+        this.ypos = ypos + this.L * Math.sin(n);
     }
 
     //http://pages.cs.wisc.edu/~bahls/cs302/miniC/Particle.java
     public void draw(Graphics g){
         g.setColor(this.color);
-        double radius = this.diameter/2;
+        int radius = this.diameter/2;
         int xPos = (int) (this.xpos - radius);
-        int yPos = (int) (this.ypos-radius);
+        int yPos = (int) (this.ypos - radius);
         g.fillOval(xPos, yPos, this.diameter, this.diameter);
 
     }
@@ -93,6 +90,14 @@ public class Particle{
 
     public boolean isMoving() {
         return moving;
+    }
+
+    public void setMoving(boolean m) {
+        moving = m;
+    }
+
+    public void setDiameter(int n) {
+        this.diameter = n;
     }
 
     public static int getNumOfParticles() {

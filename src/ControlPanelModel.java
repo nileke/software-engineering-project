@@ -1,59 +1,28 @@
-
 import java.awt.*;
+import java.awt.event.ComponentListener;
 import java.util.Observable;
 
 public class ControlPanelModel extends Observable {
-
     private double l;
-    private int diameter;
+    private double diameter;
     private Color color;
-    private int xdim;
-    private int ydim;
-    private int xoffset;
-    private int yoffset;
+    private int updateFreq;
 
-    public int getXdim() {
-        return xdim;
-    }
-
-    public void setXdim(int xdim) {
-        this.xdim = xdim;
-        change();
-    }
-
-    public int getYdim() {
-        return ydim;
-    }
-
-    public void setYdim(int ydim) {
-        this.ydim = ydim;
-        change();
-    }
-
-    public int getXoffset() {
-        return xoffset;
-    }
-
-    public void setXoffset(int xoffset) {
-        this.xoffset = xoffset;
-        change();
-    }
-
-    public int getYoffset() {
-        return yoffset;
-    }
-
-    public void setYoffset(int yoffset) {
-        this.yoffset = yoffset;
-        change();
-    }
-
-    public int getDiameter() {
+    public double getDiameter() {
         return diameter;
     }
 
-    public void setDiameter(int diameter) {
+    public void setDiameter(double diameter) {
         this.diameter = diameter;
+        change();
+    }
+
+    public int getUpdateFreq() {
+        return updateFreq;
+    }
+
+    public void setUpdateFreq(int updateFreq) {
+        this.updateFreq = updateFreq;
         change();
     }
 
@@ -73,9 +42,5 @@ public class ControlPanelModel extends Observable {
     void change(){
         setChanged();
         notifyObservers();
-    }
-
-    double getL(){
-        return this.l;
     }
 }
