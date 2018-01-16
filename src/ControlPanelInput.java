@@ -52,7 +52,7 @@ public class ControlPanelInput extends JPanel implements ActionListener {
                         .addComponent(speed3))
         );
 
-        layout.linkSize(SwingConstants.HORIZONTAL, colorBlueBtn, colorBlueBtn, colorGreenBtn, speed1, speed2, speed3);
+        layout.linkSize(SwingConstants.HORIZONTAL, colorBlackBtn, colorBlueBtn, colorGreenBtn, speed1, speed2, speed3);
     }
 
     private void setupColorControls() {

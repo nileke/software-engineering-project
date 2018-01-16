@@ -8,6 +8,11 @@ public class ControlPanelModel extends Observable {
     private Color color;
     private int updateFreq;
 
+    public ControlPanelModel(){
+        //initial color
+        this.setColor(Color.BLACK);
+    }
+
     public double getDiameter() {
         return diameter;
     }
