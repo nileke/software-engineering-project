@@ -13,7 +13,7 @@ public class WindowView extends JFrame{
     private ControlPanelInput input;
     private SimulationModel simModel;
 
-    public WindowView(SimulationModel simModel){
+    WindowView(SimulationModel simModel){
         this.simModel = simModel;
 
         ctrlPanelModel =  new ControlPanelModel();

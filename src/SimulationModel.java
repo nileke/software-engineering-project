@@ -85,7 +85,7 @@ public class  SimulationModel extends JPanel implements Observer, ComponentListe
         return condition;
     }
 
-    void implementUpdate(ControlPanelModel cpm) {
+    private void implementUpdate(ControlPanelModel cpm) {
         movingColor = cpm.getColor();
         updateFreq = cpm.getUpdateFreq();
     }
