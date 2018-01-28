@@ -83,7 +83,7 @@ public class ControlPanelInput extends JPanel implements ActionListener {
 
     }
 
-    void setupSpeedControls() {
+    private void setupSpeedControls() {
         speed1 = new JButton("1x");
         speed1.addActionListener(new ActionListener() {
             @Override

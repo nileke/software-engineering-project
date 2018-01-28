@@ -15,7 +15,7 @@ public class Particle {
      *
      *
      */
-    public Particle() {
+    Particle() {
         this.moving = true;
         numOfParticles++;
         this.xpos = this.getRandomPos(750); // based on start width
@@ -29,7 +29,7 @@ public class Particle {
      *
      *
      */
-    public Particle(double xpos, double ypos, boolean moving, Color color){
+    Particle(double xpos, double ypos, boolean moving, Color color){
         numOfParticles++;
         this.xpos = xpos;
         this.ypos = ypos;
@@ -42,7 +42,7 @@ public class Particle {
         return seed.nextDouble() * s;
     }
 
-    public void move(){
+    void move(){
         Random rand = new Random();
         double maxAngle = 2 * Math.PI;
         double n = rand.nextDouble() * (maxAngle);
@@ -51,7 +51,7 @@ public class Particle {
     }
 
     //http://pages.cs.wisc.edu/~bahls/cs302/miniC/Particle.java
-    public void draw(Graphics g){
+    void draw(Graphics g){
         g.setColor(this.color);
         int radius = this.diameter/2;
         int xPos = (int) (this.xpos - radius);
@@ -60,31 +60,31 @@ public class Particle {
 
     }
 
-    public void setColor(Color color) {
+    void setColor(Color color) {
         this.color = color;
     }
 
-    public double getXpos() {
+    double getXpos() {
         return xpos;
     }
 
-    public double getYpos() {
+    double getYpos() {
         return ypos;
     }
 
-    public boolean isMoving() {
+    boolean isMoving() {
         return moving;
     }
 
-    public void setMoving(boolean m) {
+    void setMoving(boolean m) {
         moving = m;
     }
 
-    public void setDiameter(int n) {
+    void setDiameter(int n) {
         this.diameter = n;
     }
 
-    public static int getNumOfParticles() {
+    static int getNumOfParticles() {
         return numOfParticles;
     }
 

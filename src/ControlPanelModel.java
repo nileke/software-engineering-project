@@ -2,40 +2,40 @@ import java.awt.*;
 import java.awt.event.ComponentListener;
 import java.util.Observable;
 
-public class ControlPanelModel extends Observable {
+class ControlPanelModel extends Observable {
     private double l;
     private double diameter;
     private Color color;
     private int updateFreq;
 
-    public ControlPanelModel(){
+    ControlPanelModel(){
         //initial color
         this.setColor(Color.BLACK);
     }
 
-    public double getDiameter() {
+    double getDiameter() {
         return diameter;
     }
 
-    public void setDiameter(double diameter) {
+    void setDiameter(double diameter) {
         this.diameter = diameter;
         change();
     }
 
-    public int getUpdateFreq() {
+    int getUpdateFreq() {
         return updateFreq;
     }
 
-    public void setUpdateFreq(int updateFreq) {
+    void setUpdateFreq(int updateFreq) {
         this.updateFreq = updateFreq;
         change();
     }
 
-    public Color getColor() {
+    Color getColor() {
         return color;
     }
 
-    public void setColor(Color color) {
+    void setColor(Color color) {
         this.color = color;
         change();
     }
@@ -44,7 +44,7 @@ public class ControlPanelModel extends Observable {
         this.l = l;
         change();
     }
-    void change(){
+    private void change(){
         setChanged();
         notifyObservers();
     }
