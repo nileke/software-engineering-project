@@ -3,14 +3,14 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class ControlPanelInput extends JPanel implements ActionListener {
-    ControlPanelModel mod;
-    GroupLayout layout;
-    JButton colorBlackBtn;
-    JButton colorBlueBtn;
-    JButton colorGreenBtn;
-    JButton speed1;
-    JButton speed2;
-    JButton speed3;
+    private ControlPanelModel mod;
+    private GroupLayout layout;
+    private JButton colorBlackBtn;
+    private JButton colorBlueBtn;
+    private JButton colorGreenBtn;
+    private JButton speed1;
+    private JButton speed2;
+    private JButton speed3;
 
     public ControlPanelInput(ControlPanelModel m){
         mod = m;
@@ -57,56 +57,26 @@ public class ControlPanelInput extends JPanel implements ActionListener {
 
     private void setupColorControls() {
         colorBlackBtn = new JButton("Black");
-        colorBlackBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mod.setColor(Color.BLACK);
-            }
-        });
+        colorBlackBtn.addActionListener(e -> mod.setColor(Color.BLACK));
 
 
         colorBlueBtn = new JButton("Blue");
-        colorBlueBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mod.setColor(Color.BLUE);
-            }
-        });
+        colorBlueBtn.addActionListener(e -> mod.setColor(Color.BLUE));
 
         colorGreenBtn = new JButton("Green");
-        colorGreenBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mod.setColor(Color.GREEN);
-            }
-        });
+        colorGreenBtn.addActionListener(e -> mod.setColor(Color.GREEN));
 
     }
 
     private void setupSpeedControls() {
         speed1 = new JButton("1x");
-        speed1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mod.setUpdateFreq(40);
-            }
-        });
+        speed1.addActionListener(e -> mod.setUpdateFreq(40));
 
         speed2 = new JButton("0.5x");
-        speed2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mod.setUpdateFreq(80);
-            }
-        });
+        speed2.addActionListener(e -> mod.setUpdateFreq(80));
 
         speed3 = new JButton("0.1x");
-        speed3.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                mod.setUpdateFreq(400);
-            }
-        });
+        speed3.addActionListener(e -> mod.setUpdateFreq(400));
     }
 
     @Override

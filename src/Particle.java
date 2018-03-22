@@ -1,4 +1,5 @@
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Particle {
@@ -8,6 +9,8 @@ public class Particle {
     private boolean moving;
     private double L = 1; //unknown constant
     private int diameter;
+    private int idx;
+    private ArrayList positions;
 
 
     /**
@@ -15,13 +18,15 @@ public class Particle {
      *
      *
      */
-    Particle() {
+    Particle(int idx) {
+        this.idx = idx;
         this.moving = true;
         numOfParticles++;
         this.xpos = this.getRandomPos(750); // based on start width
         this.ypos = this.getRandomPos(500); // based on start height
         this.diameter = 4;
         this.color = Color.BLACK;
+        positions = new ArrayList();
     }
 
     /**
