@@ -27,7 +27,7 @@ public class  SimulationModel extends JPanel implements Observer, ComponentListe
         ydim = this.getSize().height;
         movingColor = Color.BLACK;
         particleMap = new ArrayList<>();
-        MovingParticles = new ArrayList<>();
+        movingParticles = new ArrayList<>();
         nonMovingParticles = new ArrayList<>();
         this.numberOfParticles = numberOfParticles;
         particles = new Particle[this.numberOfParticles];
